@@ -50,3 +50,47 @@ def parse_json_line(line):
     return data
 
 print(parse_json_line('{"timestamp":"2025-12-20","level":"INFO","user":"admin","action":"login"}'))
+
+def check_server_status(status_code):
+    if status_code == 200:
+        return "Healthy"
+    elif status_code == 404:
+        return "not found"
+    elif status_code == 500:
+        return "error"
+    else:
+        return "unknown"
+    
+print(check_server_status(200))  # Healthy
+print(check_server_status(500))  
+
+
+
+def validate_port(port):
+    if 1 <= port <= 65535:
+        return True
+    return False
+print(validate_port(8080))  # True  # error
+print(validate_port(70000))  # False
+
+
+def format_time(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    secs = seconds % 60
+    return f"{hours:02}:{minutes:02}:{secs:02}"
+print(format_time(3661))  # 01:01:01
+
+
+def check_disk_usage(used, total):
+    usage_percent = (used / total) * 100
+    if usage_percent < 70:
+        return "Healthy"
+    elif 70 <= usage_percent < 90:
+        return "Warning"
+    else:
+        return "Critical"
+
+print(check_disk_usage(500, 1000))  # Healthy   
+
+    
